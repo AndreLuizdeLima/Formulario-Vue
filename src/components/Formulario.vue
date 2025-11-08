@@ -169,7 +169,9 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Descrição:</label>
                         <div class="col">
-                            <select></select>
+                            <select class="form-select">
+                                <option v-for="curso in cursos" :key="curso.id">{{ curso.descricao }}</option>
+                            </select>
                         </div>
                     </div>
                     <hr>
@@ -278,9 +280,12 @@
 export default {
     name: 'FormularioHome',
     data: () => ({
-        curos: {
-            
-        },
+        curos: [
+            {id:1, curso: 'Banco de dados'},
+            {id:2, curso: 'Java'},
+            {id:3, curso: 'PHP'},
+            {id:4, curso: 'Python'},
+        ],
         form: {
             nome: 'Nome',
             email: '',
