@@ -53,9 +53,7 @@
                         <label class="col-3 col-form-label">Licença:</label>
                         <div class="col">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" 
-                                    v-model="form.licenca"
-                                    true-value="SIM"
+                                <input class="form-check-input" type="checkbox" v-model="form.licenca" true-value="SIM"
                                     false-value="NÃO">
                                 <label class="form-check-label">Li e aceito os termos</label>
                             </div>
@@ -66,7 +64,8 @@
                         <label class="col-3 col-form-label">Interesses:</label>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="JavaScript">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses"
+                                    value="JavaScript">
                                 <label class="form-check-label">
                                     JavaScript
                                 </label>
@@ -78,13 +77,15 @@
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="Angular">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses"
+                                    value="Angular">
                                 <label class="form-check-label">
                                     Angular
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="NodeJS">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses"
+                                    value="NodeJS">
                                 <label class="form-check-label">
                                     NodeJS
                                 </label>
@@ -94,14 +95,14 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Telefone:</label>
                         <div class="col">
-                            <input type="tel" class="form-control"  v-mask="'(##) #####-####'"  v-model="form.telefone" >
+                            <input type="tel" class="form-control" v-mask="'(##) #####-####'" v-model="form.telefone">
                             <small class="text-muted">Formato: (11) 97777-5555</small>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Placa:</label>
                         <div class="col">
-                            <input type="tel" class="form-control"  v-mask="'SSS-#S###'"  v-model="form.placa" >
+                            <input type="tel" class="form-control" v-mask="'SSS-#S###'" v-model="form.placa">
                             <small class="text-muted">Placa: xyz-1x45</small>
                         </div>
                     </div>
@@ -138,25 +139,37 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Cor:</label>
                         <div class="col">
-                            <input type="color" class="form-color">
+                            <input type="color" class="form-color" v-model="form.color">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Valor limite:</label>
                         <div class="col">
-                            <input type="range" class="form-range" min="0" max="100" step="1">
+                            <input type="range" class="form-range" min="0" max="100" step="5" v-model="form.alcance">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Escondido:</label>
                         <div class="col">
-                            <input type="hidden" class="form-control">
+                            <input type="hidden" class="form-control" v-model="form.escondido">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Upload:</label>
                         <div class="col">
-                            <input type="file" class="form-control">
+                            <input type="file" class="form-control" @change="selecionarArquivos($event)">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label">Descrição:</label>
+                        <div class="col">
+                            <textarea class="form-control" rows="3" v-model="form.descricao"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label">Descrição:</label>
+                        <div class="col">
+                            <select></select>
                         </div>
                     </div>
                     <hr>
@@ -202,7 +215,6 @@
                 </div>
                 <div class="mb-3 row">
                     <span>Interesses:</span>
-
                     <ul>
                         <li v-for="(interesses, index) in form.interesses" :key="index">* {{ interesses }}</li>
                     </ul>
@@ -214,10 +226,15 @@
                     <span>Placa: {{ form.placa }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <span>Data: {{ form.data }} || {{ moment(form.data).format('DD/MM/YYYY') }}</span>
+                    <span>Data: {{ form.data }} || {{ $moment(form.data).format('DD/MM/YYYY') }}</span>
                 </div>
                 <div class="mb-3 row">
                     <span>Data/hora local: {{ form.dataHoraLocal }}</span>
+                    <ol>
+                        <li>{{ $moment(form.dataHoraLocal).format('dddd') }}</li>
+                        <li>{{ $moment(form.dataHoraLocal).add(10, 'days') }}</li>
+                        <li>{{ $moment(form.dataHoraLocal).subtract(1, 'months').locale('pt-br').format('LLLL') }}</li>
+                    </ol>
                 </div>
                 <div class="mb-3 row">
                     <span>Mês: {{ form.mes }}</span>
@@ -229,16 +246,23 @@
                     <span>Hora: {{ form.hora }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <span>Cor:</span>
+                    <span :style="'color:' + form.color + '!important'">Cor: {{ form.color }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <span>Valor limite:</span>
+                    <span>Valor limite: {{ form.alcance }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <span>Escondido:</span>
+                    <span>Escondido: {{ form.escondido }}</span>
                 </div>
                 <div class="mb-3 row">
                     <span>Upload:</span>
+                    <ul>
+                        <li v-for="(arquivo, index) in form.arquivo" :key="index">{{ arquivo.name }}</li>
+                    </ul>
+                </div>
+                <div class="mb-3 row">
+                    <span>Descrição:</span>
+                    <div style="white-space: pre;">{{ form.descricao }}</div>
                 </div>
             </div>
         </div>
@@ -248,14 +272,15 @@
 </template>
 
 <script>
-import moment from 'moment'
+
 
 
 export default {
     name: 'FormularioHome',
     data: () => ({
-        moment: {},
-
+        curos: {
+            
+        },
         form: {
             nome: 'Nome',
             email: '',
@@ -271,10 +296,18 @@ export default {
             mes: '',
             semana: '',
             hora: '',
+            color: '#212783',
+            alcance: 5,
+            escondido: 'input oculto',
+            arquivo: {},
+            descricao: ''
         }
     }),
-    created() {
-        this.moment = moment
+    methods: {
+        selecionarArquivos(event) {
+            console.log(event.target.files)
+            this.form.arquivo = event.target.files
+        }
     }
 }
 </script>
