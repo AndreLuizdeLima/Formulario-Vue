@@ -8,7 +8,7 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Nome:</label>
                         <div class="col">
-                            <input type="text" class="form-control" v-model="form.nome">
+                            <input type="text" class="form-control" v-model.lazy="form.nome">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -20,7 +20,7 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Senha:</label>
                         <div class="col">
-                            <input type="password" class="form-control" v-model="form.senha">
+                            <input type="password" class="form-control" v-model.trim.lazy="form.senha">
                         </div>
                     </div>
 
@@ -28,20 +28,20 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Idade:</label>
                         <div class="col">
-                            <input type="number" class="form-control" v-model="form.idade">
+                            <input type="number" class="form-control" v-model.number="form.idade">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Gênero:</label>
                         <div class="col">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio">
+                                <input class="form-check-input" type="radio" v-model="form.genero" value="F">
                                 <label class="form-check-label">
                                     Feminino
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio">
+                                <input class="form-check-input" type="radio" v-model="form.genero" value="M">
                                 <label class="form-check-label">
                                     Masculino
                                 </label>
@@ -53,7 +53,10 @@
                         <label class="col-3 col-form-label">Licença:</label>
                         <div class="col">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" 
+                                    v-model="form.licenca"
+                                    true-value="SIM"
+                                    false-value="NÃO">
                                 <label class="form-check-label">Li e aceito os termos</label>
                             </div>
                         </div>
@@ -63,25 +66,25 @@
                         <label class="col-3 col-form-label">Interesses:</label>
                         <div class="col">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="JavaScript">
                                 <label class="form-check-label">
-                                    JavaScriot
+                                    JavaScript
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="VueJS">
                                 <label class="form-check-label">
                                     VueJS
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="Angular">
                                 <label class="form-check-label">
                                     Angular
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
+                                <input class="form-check-input" type="checkbox" v-model="form.interesses" value="NodeJS">
                                 <label class="form-check-label">
                                     NodeJS
                                 </label>
@@ -91,38 +94,45 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Telefone:</label>
                         <div class="col">
-                            <input type="tel" class="form-control" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}">
-                            <small class="text-muted">Formato: 11 97777-5555</small>
+                            <input type="tel" class="form-control"  v-mask="'(##) #####-####'"  v-model="form.telefone" >
+                            <small class="text-muted">Formato: (11) 97777-5555</small>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-3 col-form-label">Placa:</label>
+                        <div class="col">
+                            <input type="tel" class="form-control"  v-mask="'SSS-#S###'"  v-model="form.placa" >
+                            <small class="text-muted">Placa: xyz-1x45</small>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Data:</label>
                         <div class="col">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" v-model="form.data">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Data/hora local:</label>
                         <div class="col">
-                            <input type="datetime-local" class="form-control">
+                            <input type="datetime-local" class="form-control" v-model="form.dataHoraLocal">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Mês:</label>
                         <div class="col">
-                            <input type="month" class="form-control">
+                            <input type="month" class="form-control" v-model="form.mes">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Semana:</label>
                         <div class="col">
-                            <input type="week" class="form-control">
+                            <input type="week" class="form-control" v-model="form.semana">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Hora:</label>
                         <div class="col">
-                            <input type="time" class="form-control">
+                            <input type="time" class="form-control" v-model="form.hora">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -166,62 +176,69 @@
                 <span class="fs-4">ESTADO DO OBJETO</span>
                 <hr>
                 <div class="mb-5 row">
-                    <spam>Estado do objeto</spam>
-                    <spam>{{form}}</spam>
+                    <span>Estado do objeto</span>
+                    <span>{{ form }}</span>
                 </div>
 
                 <span class="fs-4">SAÍDA DE DADOS</span>
                 <hr>
                 <div class="mb-3 row">
-                    <spam>Nome: {{ form.nome }}</spam>
+                    <span>Nome: {{ form.nome }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>E-mail: {{ form.email }}</spam>
+                    <span>E-mail: {{ form.email }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Senha: {{ form.senha }}</spam>
+                    <span>Senha: {{ form.senha }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Idade: {{ form.idade }}</spam>
+                    <span>Idade: {{ form.idade }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Gênero:</spam>
+                    <span>Gênero: {{ form.genero }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Licença:</spam>
+                    <span>Licença: {{ form.licenca }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Interesses:</spam>
+                    <span>Interesses:</span>
+
+                    <ul>
+                        <li v-for="(interesses, index) in form.interesses" :key="index">* {{ interesses }}</li>
+                    </ul>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Telefone:</spam>
+                    <span>Telefone: {{ form.telefone }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Data:</spam>
+                    <span>Placa: {{ form.placa }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Data/hora local:</spam>
+                    <span>Data: {{ form.data }} || {{ moment(form.data).format('DD/MM/YYYY') }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Mês:</spam>
+                    <span>Data/hora local: {{ form.dataHoraLocal }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Semana:</spam>
+                    <span>Mês: {{ form.mes }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Hora:</spam>
+                    <span>Semana: {{ form.semana }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Cor:</spam>
+                    <span>Hora: {{ form.hora }}</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Valor limite:</spam>
+                    <span>Cor:</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Escondido:</spam>
+                    <span>Valor limite:</span>
                 </div>
                 <div class="mb-3 row">
-                    <spam>Upload:</spam>
+                    <span>Escondido:</span>
+                </div>
+                <div class="mb-3 row">
+                    <span>Upload:</span>
                 </div>
             </div>
         </div>
@@ -231,15 +248,33 @@
 </template>
 
 <script>
+import moment from 'moment'
+
+
 export default {
     name: 'FormularioHome',
     data: () => ({
+        moment: {},
+
         form: {
-            nome: '',
+            nome: 'Nome',
             email: '',
             senha: '',
-            idade: ''
+            idade: '',
+            licenca: 'SIM',
+            interesses: ["NodeJS"],
+            genero: '',
+            telefone: '',
+            placa: '',
+            data: '',
+            dataHoraLocal: '',
+            mes: '',
+            semana: '',
+            hora: '',
         }
-    })
+    }),
+    created() {
+        this.moment = moment
+    }
 }
 </script>
