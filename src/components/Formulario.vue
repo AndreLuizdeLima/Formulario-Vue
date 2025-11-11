@@ -169,8 +169,13 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Descrição:</label>
                         <div class="col">
-                            <select class="form-select">
-                                <option v-for="curso in cursos" :key="curso.id">{{ curso.descricao }}</option>
+                            <select class="form-select" v-model="form.curso">
+                                <option value="" disabled>Selecione um Curso</option>
+                                <option 
+                                    v-for="curso in cursos" 
+                                    :key="curso.id"
+                                    :value="curso.id"
+                                    > {{ curso.curso }}</option>
                             </select>
                         </div>
                     </div>
@@ -257,6 +262,9 @@
                     <span>Escondido: {{ form.escondido }}</span>
                 </div>
                 <div class="mb-3 row">
+                    <span>Curso: {{ form.curso }}</span>
+                </div>
+                <div class="mb-3 row">
                     <span>Upload:</span>
                     <ul>
                         <li v-for="(arquivo, index) in form.arquivo" :key="index">{{ arquivo.name }}</li>
@@ -280,7 +288,7 @@
 export default {
     name: 'FormularioHome',
     data: () => ({
-        curos: [
+        cursos: [
             {id:1, curso: 'Banco de dados'},
             {id:2, curso: 'Java'},
             {id:3, curso: 'PHP'},
@@ -305,7 +313,8 @@ export default {
             alcance: 5,
             escondido: 'input oculto',
             arquivo: {},
-            descricao: ''
+            descricao: '',
+            curso: ''
         }
     }),
     methods: {
