@@ -4,6 +4,7 @@
             <div class="col-6 bg-light">
                 <span class="fs-4">ENTRADA DE DADOS</span>
                 <hr>
+                <!-- <form @submit.prevent="enviar($event)"> -->
                 <form>
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Nome:</label>
@@ -183,7 +184,7 @@
                     <div class="mb-3 row">
                         <div class="col d-flex justify-content-between">
                             <button class="btn btn-secondary" type="reset">Limpar</button>
-                            <button class="btn btn-success" type="button">Enviar (btn)</button>
+                            <button class="btn btn-success" type="button" @click="enviar($event)">Enviar (btn)</button>
                             <button class="btn btn-success" type="submit">Enviar (submit)</button>
                         </div>
                     </div>
@@ -321,6 +322,16 @@ export default {
         selecionarArquivos(event) {
             console.log(event.target.files)
             this.form.arquivo = event.target.files
+        },
+        
+        enviar(e){
+            const formEnvio = Object.assign({}, this.form ) 
+     
+            // envia a requisição http para o back-end retorna 
+            // promise que vai nos permitir tomar ações se deu certou ou não a requisição
+
+            console.log(e)
+            console.log(formEnvio)
         }
     }
 }
