@@ -5,7 +5,7 @@
                 <span class="fs-4">ENTRADA DE DADOS</span>
                 <hr>
                 <!-- <form @submit.prevent="enviar($event)"> -->
-                <form>
+                <form @reset.prevent="resetar()">
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Nome:</label>
                         <div class="col">
@@ -295,9 +295,11 @@ export default {
             {id:3, curso: 'PHP'},
             {id:4, curso: 'Python'},
         ],
-        form: {
+        form: {},
+
+        formInicial: {
             nome: 'Nome',
-            email: '',
+            email: 'andre@andre',
             senha: '',
             idade: '',
             licenca: 'SIM',
@@ -318,6 +320,10 @@ export default {
             curso: ''
         }
     }),
+
+    created(){
+        this.resetar()
+    },
     methods: {
         selecionarArquivos(event) {
             console.log(event.target.files)
@@ -332,6 +338,10 @@ export default {
 
             console.log(e)
             console.log(formEnvio)
+        },
+
+        resetar() {
+            this.form = Object.assign({}, this.formInicial ) 
         }
     }
 }
