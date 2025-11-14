@@ -183,7 +183,8 @@
                     <div class="mb-3 row">
                         <label class="col-3 col-form-label">Avaliação:</label>
                         <div class="col">
-                            <input-estrelas></input-estrelas>
+                            <!-- <input-estrelas :numero-estrelas="5" @avaliar="form.avaliacao = $event" ></input-estrelas> -->
+                            <input-estrelas :numero-estrelas="5" v-model:avaliar="form.avaliacao" ></input-estrelas>
                         </div>
                     </div>
                     <hr>
@@ -272,6 +273,9 @@
                     <span>Curso: {{ form.curso }}</span>
                 </div>
                 <div class="mb-3 row">
+                    <span>Avaliação: {{ form.avaliacao }}</span>
+                </div>
+                <div class="mb-3 row">
                     <span>Upload:</span>
                     <ul>
                         <li v-for="(arquivo, index) in form.arquivo" :key="index">{{ arquivo.name }}</li>
@@ -326,7 +330,8 @@ export default {
             escondido: 'input oculto',
             arquivo: {},
             descricao: '',
-            curso: ''
+            curso: '',
+            avaliacao: 0
         }
     }),
 
